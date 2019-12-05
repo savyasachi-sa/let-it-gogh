@@ -18,6 +18,7 @@ class StyleTransferDataset(td.Dataset):
         self.style_images_dir = styleImageDir
         self.content_images_dir = contentImageDir
         self.files = os.listdir(self.style_images_dir)
+        sorted(self.files)
 
     def __len__(self):
         return len(self.files)
@@ -29,8 +30,7 @@ class StyleTransferDataset(td.Dataset):
     ## Returns
     ## [Style Image, Content Image, PreProcessed Style Image Tensor, PreProcessed Content Image Tensor, OptImage]
     def __getitem__(self, idx):
-        print(self.style_images_dir)
-        print(self.content_images_dir)
+
         style_img_path = os.path.join(self.style_images_dir, self.files[idx])
         content_img_path = os.path.join(self.content_images_dir, self.files[idx])
 

@@ -34,17 +34,21 @@ def train(T, style_layers, content_layers, style_weights, content_weights, num_e
     n_iter = 0
     show_iter = 50
     while n_iter <= num_epochs:
-        optimizer.zero_grad()
-        out = net(opt_img, loss_layers)
-        layer_losses = [weights[a] * loss_fns[a](A, targets[a]) for a, A in enumerate(out)]
-        loss = sum(layer_losses)
-        loss.backward()
+        
+        def closure():        
+            optimizer.zero_grad()
+            out = net(opt_img, loss_layers)
+            layer_losses = [weights[a] * loss_fns[a](A, targets[a]) for a, A in enumerate(out)]
+            loss = sum(layer_losses)
+            loss.backward()
+            return loss
+
+        optimizer.step(closure)
         n_iter += 1
-        optimizer.step()
 
         # print loss
         if n_iter % show_iter == (show_iter - 1):
-            print('Iteration: %d, loss: %f' % (n_iter + 1, loss.data[0]))
+            print(n_iter, "Completed")
 
     out_img = postProcess(opt_img.cpu().squeeze())
 
