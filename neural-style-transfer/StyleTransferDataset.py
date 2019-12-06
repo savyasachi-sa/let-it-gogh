@@ -17,8 +17,7 @@ class StyleTransferDataset(td.Dataset):
         self.img_size = img_size
         self.style_images_dir = styleImageDir
         self.content_images_dir = contentImageDir
-        self.files = os.listdir(self.style_images_dir)
-        sorted(self.files)
+        self.files = sorted(os.listdir(self.style_images_dir))
 
     def __len__(self):
         return len(self.files)
