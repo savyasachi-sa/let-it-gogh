@@ -1,6 +1,6 @@
 import os
 from argparse import ArgumentParser
-import model as md
+import train as tn
 from utils import create_link
 import test as tst
 
@@ -48,7 +48,7 @@ def main():
   print(not args.no_dropout)
   if args.training:
       print("Training")
-      model = md.cycleGAN(args)
+      model = tn.cycleGAN(args)
       model.train(args)
   if args.testing:
       print("Testing")

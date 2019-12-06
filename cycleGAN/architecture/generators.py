@@ -1,7 +1,7 @@
 import functools
 import torch
 from torch import nn
-from .ops import conv_norm_relu, dconv_norm_relu, ResidualBlock, get_norm_layer, init_network
+from .options import conv_norm_relu, dconv_norm_relu, ResidualBlock, get_norm_layer, init_network
 
 
 class UnetSkipConnectionBlock(nn.Module):
@@ -93,7 +93,7 @@ class ResnetGenerator(nn.Module):
 
 
 
-def define_Gen(input_nc, output_nc, ngf, netG, norm='batch', use_dropout=False, gpu_ids=[0]):
+def Generator(input_nc, output_nc, ngf, netG, norm='batch', use_dropout=False, gpu_ids=[0]):
     gen_net = None
     norm_layer = get_norm_layer(norm_type=norm)
 

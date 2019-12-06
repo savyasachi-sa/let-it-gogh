@@ -8,7 +8,7 @@ from torch.autograd import Variable
 import torchvision.datasets as dsets
 import torchvision.transforms as transforms
 import utils
-from arch import define_Gen, define_Dis, set_grad
+from architecture import Generator, Discriminator, set_grad
 from torch.optim import lr_scheduler
 
 '''
@@ -20,12 +20,12 @@ class cycleGAN(object):
 
         # Define the network 
         #####################################################
-        self.Gab = define_Gen(input_nc=3, output_nc=3, ngf=args.ngf, netG=args.gen_net, norm=args.norm, 
+        self.Gab = Generator(input_nc=3, output_nc=3, ngf=args.ngf, netG=args.gen_net, norm=args.norm, 
                                                     use_dropout= not args.no_dropout, gpu_ids=args.gpu_ids)
-        self.Gba = define_Gen(input_nc=3, output_nc=3, ngf=args.ngf, netG=args.gen_net, norm=args.norm, 
+        self.Gba = Generator(input_nc=3, output_nc=3, ngf=args.ngf, netG=args.gen_net, norm=args.norm, 
                                                     use_dropout= not args.no_dropout, gpu_ids=args.gpu_ids)
-        self.Da = define_Dis(input_nc=3, ndf=args.ndf, netD= args.dis_net, n_layers_D=3, norm=args.norm, gpu_ids=args.gpu_ids)
-        self.Db = define_Dis(input_nc=3, ndf=args.ndf, netD= args.dis_net, n_layers_D=3, norm=args.norm, gpu_ids=args.gpu_ids)
+        self.Da = Discriminator(input_nc=3, ndf=args.ndf, netD= args.dis_net, n_layers_D=3, norm=args.norm, gpu_ids=args.gpu_ids)
+        self.Db = Discriminator(input_nc=3, ndf=args.ndf, netD= args.dis_net, n_layers_D=3, norm=args.norm, gpu_ids=args.gpu_ids)
 
         utils.print_networks([self.Gab,self.Gba,self.Da,self.Db], ['Gab','Gba','Da','Db'])
 

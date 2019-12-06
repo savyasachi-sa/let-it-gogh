@@ -1,5 +1,5 @@
 from torch import nn
-from .ops import conv_norm_lrelu, get_norm_layer, init_network
+from .options import conv_norm_lrelu, get_norm_layer, init_network
 import torch
 from torch.nn import functional as F
 import functools
@@ -46,7 +46,7 @@ class PixelDiscriminator(nn.Module):
 
 
 
-def define_Dis(input_nc, ndf, netD, n_layers_D=3, norm='batch', gpu_ids=[0]):
+def Discriminator(input_nc, ndf, netD, n_layers_D=3, norm='batch', gpu_ids=[0]):
     dis_net = None
     norm_layer = get_norm_layer(norm_type=norm)
     if type(norm_layer) == functools.partial:

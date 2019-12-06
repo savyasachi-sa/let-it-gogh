@@ -6,7 +6,7 @@ import torchvision
 import torchvision.datasets as dsets
 import torchvision.transforms as transforms
 import utils
-from arch import define_Gen, define_Dis
+from architecture import Generator, Discriminator
 
 
 
@@ -28,9 +28,9 @@ def test(args):
     a_test_loader = torch.utils.data.DataLoader(a_test_data, batch_size=args.batch_size, num_workers=4)
     b_test_loader = torch.utils.data.DataLoader(b_test_data, batch_size=args.batch_size, num_workers=4)
 
-    Gab = define_Gen(input_nc=3, output_nc=3, ngf=args.ngf, netG='resnet_9blocks', norm=args.norm, 
+    Gab = Generator(input_nc=3, output_nc=3, ngf=args.ngf, netG='resnet_9blocks', norm=args.norm, 
                                                     use_dropout= not args.no_dropout, gpu_ids=args.gpu_ids)
-    Gba = define_Gen(input_nc=3, output_nc=3, ngf=args.ngf, netG='resnet_9blocks', norm=args.norm, 
+    Gba = Generator(input_nc=3, output_nc=3, ngf=args.ngf, netG='resnet_9blocks', norm=args.norm, 
                                                     use_dropout= not args.no_dropout, gpu_ids=args.gpu_ids)
 
     utils.print_networks([Gab,Gba], ['Gab','Gba'])
@@ -95,7 +95,6 @@ def test(args):
         # Save image files
         torchvision.utils.save_image(b_real_test, args.results_dir+'/inputA/%04d.png' % (i+1))
         torchvision.utils.save_image(a_fake_test, args.results_dir+'/outputA/%04d.png' % (i+1))
-        torchvision.utils.save_image(b_fake_test, args.results_dir+'/outputB/%04d.png' % (i+1))
 
-    print("created output directories")
+    print("\n\nCreated Output Directories\n\n")
 
