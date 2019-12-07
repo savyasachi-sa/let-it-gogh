@@ -90,6 +90,7 @@ def test(args):
             b_recon_test = Gba(a_fake_test)
             a_fake_test = (a_fake_test+1)/2.0
             b_real_test = (b_real_test+1)/2.0
+            a_real_test = (a_real_test+1)/2.0
             b_fake_test = (b_fake_test+1)/2.0
 
         # Save image files
