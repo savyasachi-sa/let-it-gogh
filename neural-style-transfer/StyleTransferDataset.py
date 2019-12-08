@@ -7,6 +7,11 @@ from PIL import Image
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
+
+## Dataset Class used for Style Transfer. Loads a style and content pair, pre-processes them and returns all of them.
+## img_size - size of the images used for training.
+## img_dir - Image Directory path expecting to have two directories Style/ and Content/ directories. they are expected to have files with same name which would be paired together.
+## Init - The way to initialise the opt_image. Possible Values -  "Random", "Content" or "Style"
 class StyleTransferDataset(td.Dataset):
     def __init__(self, img_size=512, img_dir = './Images/', init='Random'):
         super(StyleTransferDataset, self).__init__()
@@ -33,7 +38,7 @@ class StyleTransferDataset(td.Dataset):
         content_img_path = os.path.join(self.content_images_dir, self.files[idx])
 
         ## Referencing Original paper's work
-        pre_process = transforms.Compose([transforms.Resize((self.img_size,self.img_size)),
+        pre_process = transforms.Compose([transforms.Resize(self.img_size),
                                           transforms.ToTensor(),
                                           transforms.Lambda(lambda x: x[torch.LongTensor([2, 1, 0])]),  # turn to BGR
                                           transforms.Normalize(mean=[0.40760392, 0.45795686, 0.48501961],
@@ -44,16 +49,16 @@ class StyleTransferDataset(td.Dataset):
 
         imgs = [Image.open(style_img_path), Image.open(content_img_path)]
         imgs_torch = [pre_process(img) for img in imgs]
-        imgs_torch = [Variable(img.unsqueeze(0).to(device)) for img in imgs_torch]
+        imgs_torch = [img.unsqueeze(0).to(device) for img in imgs_torch]
 
         style_image, content_image = imgs_torch
         
         if self.init is 'Content':
-            opt_img = Variable(content_image.data.clone(), requires_grad=True)
+            opt_img = content_image.clone().detach().requires_grad_(True)
         elif self.init is 'Style':
-            opt_img = Variable(style_image.data.clone(), requires_grad=True)
+            opt_img = style_image.clone().detach().requires_grad_(True)
         else: ## Default =  Random
-            opt_img = Variable(torch.randn(content_image.size()).type_as(content_image.data), requires_grad=True)
+            opt_img = torch.randn(content_image.size()).type_as(content_image.data).requires_grad_(True)
 
 
         return imgs + [style_image, content_image, opt_img]

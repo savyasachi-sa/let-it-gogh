@@ -20,6 +20,7 @@ def postProcess(tensor):
     img = postProcess2(t)
     return img
 
+## Main Training method
 def train(T, style_layers, content_layers, style_weights, content_weights, num_epochs):
     weights = style_weights + content_weights
 
