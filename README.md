@@ -24,7 +24,7 @@ There are two main directories -
 * Images/ - Holds the images used for training and demo purposes. Contains two directories for Style & Content respectively. Files with the same name from Style and Content are picked as pair for style transfer.
 
 
-### cycleGan:
+### cycleGAN:
 
 * *demo_cycleGAN.ipynb* - notebook for the demo of CycleGAN implementatiom.
 * *train_cycleGAN.ipynb* - notebook for training the model.
