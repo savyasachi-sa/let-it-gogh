@@ -26,6 +26,11 @@ There are two main directories -
 
 ### cycleGan:
 
-* *demo_cycleGAN.ipynb* - Run a demo for CycleGAN implementatiom.
-* *train_cycleGAN.ipynb* - To train the model.
+* *demo_cycleGAN.ipynb* - notebook for the demo of CycleGAN implementatiom.
+* *train_cycleGAN.ipynb* - notebook for training the model.
+* *experiments* - contains all the experimental notebooks for cycleGANs
+* *train.py* - training module
+* *test.py* - testing module
+* *main.py* - module for invoking testing/training 
+* *architecture* - contains the architecture of Generators and Discriminators
 
