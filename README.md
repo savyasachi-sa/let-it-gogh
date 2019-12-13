@@ -38,3 +38,4 @@ There are two main directories -
   * *generators.py* - Contains generator architecture (conv and residual layers)
   * *options.py* - Defines layer and initialization types used to create architectures in generators.py and discriminators.py
 * *utils.py* - Contains code for image pool strategy and the learning rate decay
+* *downlaod_cyclegan_dataset.sh* - Script downlaods official datasets from https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/
