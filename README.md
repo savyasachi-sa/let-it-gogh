@@ -10,7 +10,7 @@ Code Organization
 
 There are two main directories - 
  * *neural-style-transfer* - holds the code for the implementation of "A Neural Algorithm of Artistic Style" by Gatys
- * *cycleGan* - holds the code for implementation of style transfer using cycle GANs
+ * *cycleGan* - holds the code for implementation of style transfer using cycleGANs as introduced in the paper titled "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks"
 
 ### neural-style-transfer:
 
