@@ -26,11 +26,15 @@ There are two main directories -
 
 ### cycleGAN:
 
-* *demo_cycleGAN.ipynb* - notebook for the demo of CycleGAN implementatiom.
-* *train_cycleGAN.ipynb* - notebook for training the model.
-* *experiments* - contains all the experimental notebooks for cycleGANs
-* *train.py* - training module
-* *test.py* - testing module
-* *main.py* - module for invoking testing/training 
-* *architecture* - contains the architecture of Generators and Discriminators
-
+* *demo_cycleGAN.ipynb* - Run a demo of CycleGAN implementation on pretrained models from created checkpoints.
+* *train_cycleGAN.ipynb* - Train a new cycleGAN model.
+* *experiments/*
+  * *cycleGANexp.ipynb* - Trains similar cycleGAN architecture. Tracks adversarial, cyclic, identity and discrimiinator losses to produce Fig 6 of the report. Weights to losses experimented with to produce Fig 8 and 9 of the report. Noticeable variations in results with initialization.
+* *train.py* - Creates network architecture, defines optimizers, training method and losses, and saves checkpoints to directory.
+* *test.py* - Testing module that loads trained checkpoints into the defined network architecture for style transfer on test data, results of which are saved to an output directory.
+* *main.py* - Module to utilize arguments from the command line for parameter and experiment setup and run.
+* *architecture/*
+  * *discriminators.py* - Contains discriminator architecture (convnet)
+  * *generators.py* - Contains generator architecture (conv and residual layers)
+  * *options.py* - Defines layer and initialization types used to create architectures in generators.py and discriminators.py
+* *utils.py* - Contains code for image pool strategy and the learning rate decay
